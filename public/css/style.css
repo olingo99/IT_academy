@@ -1,0 +1,42 @@
+button{
+    color: green;
+    background-color: lightgrey;
+    border: lightgrey;
+    border-radius: 5px;
+    font-size:medium;
+    height: 30px;
+}
+
+#inscription,#supprimer{
+    height: 25px;
+    font-size: small;
+    float: left;
+}
+h1{
+    text-align: center;
+    color: #3545A7;
+}
+
+h2,h3{
+    color: #3545A7;
+}
+
+#form{
+    display: flex;
+    float: none;
+}
+
+#childform{
+    margin-right: 20px;;
+}
+
+th{
+    border: 1px solid lightgrey;
+}
+html{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#gris{
+    background-color: darkgrey;
+}

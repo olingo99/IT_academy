@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <title>IT Academy</title>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <h1>IT Academy</h1>
+
+
+    <% if (state == 'succes') { %>
+    <div>Inscription enregistrée avec succes!</div>
+    <% } else if (state == 'errordup') { %>
+        <div>Vous etes deja inscrit à une des ces formations, veuillez la retirer de votre panier avant de continuer</div>
+    <% } else { %>
+     <div>Une erreur c'est produite lors de l'enregistrement de vos formation ,veuillez recomencer.</div>
+    <% } %>
+    <form action="/" method="get">
+        <button type="submit">Retourner au catalogue</button>
+    </form>
+</body>
+
+
+</html>
