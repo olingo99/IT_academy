@@ -17,6 +17,9 @@ var catalogue;
 var usersId =[];
 var users = [];
 
+
+//salut le git
+
 exports.home = function(req, res) {
     connection.query("SELECT * FROM formations;", function(error, result){
         if (error) console.log(error);
