@@ -15,7 +15,6 @@ var connection = mysql.createConnection({
 });
 
 exports.createPanier = function(inUser){
-    //console.log('oui');
     users.push(inUser);
     inUser.addPanier(new Panier());
 }
@@ -58,11 +57,11 @@ exports.addPanier = function(req, res){
     if (!(panier.contains(parseInt(req.params.formaid)))){
         panier.add(parseInt(req.params.formaid));
     }
-//console.log(panier);
 };
 
 exports.finaliser = function(req, res){
     panier = getPanierById(req.session.id);
+    console.log(req.session.user);
     if (typeof req.session.user != 'undefined'){
         querysql = "INSERT INTO personne_formation (id_formation, pseudo) VALUES";
         values = [];
@@ -74,8 +73,6 @@ exports.finaliser = function(req, res){
         });
         querysql = querysql.slice(0,-1);
         querysql+=";";
-    //    console.log(querysql);
-    //    console.log(values);
         connection.query(querysql, values, function(error, result){Error
             if(error){
                 if (error['code'] == 'ER_DUP_ENTRY'){
@@ -92,22 +89,6 @@ exports.finaliser = function(req, res){
         res.render('connexion.ejs',{state:'finaliser'})
     }  
 }
-
-// getPanierById = function(id){
-//     let res;
-//     console.log(users);
-// users.forEach(elem =>{
-//     //console.log('elem');
-//     //console.log(elem.getId());
-//     if (elem.getId()==id.toString()){
-//         //console.log('panierrrrrrrrrrrrrrrrrrrrrrr');
-//         //console.log(elem.getPanier());
-//         //console.log('test');
-//         res = elem.getPanier();
-//     }
-// })
-// return res;
-// }
 
 getPanierById = function(id){
     for (var i=0;i<users.length;i++){
