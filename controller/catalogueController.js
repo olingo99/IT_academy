@@ -7,12 +7,12 @@ const User = require('../model/userModel');
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password:'root',
+    user: 'olingo',
+    password:'olingoolingo',
     database: 'it_academy'
 });
 
-var panier;
+
 var catalogue;
 var usersId =[];
 var users = [];
@@ -25,7 +25,6 @@ exports.home = function(req, res) {
         if (error) console.log(error);
         catalogue = new Catalogue(result);
         list_forma = catalogue.list_forma;
-        //console.log(list_forma)
         res.render('home.ejs', {list_forma});
     })
     if (!(usersId.includes(req.session.id))){

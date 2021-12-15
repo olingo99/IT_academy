@@ -9,8 +9,8 @@ var mysql = require("mysql");
 const { query } = require('express');
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password:'root',
+    user: 'olingo',
+    password:'olingoolingo',
     database: 'it_academy'
 });
 
@@ -20,12 +20,8 @@ exports.createPanier = function(inUser){
 }
 
 exports.removepanier = function(req,res){
-    console.log('formaid');
-    console.log(req.params.formaid);
     panier = getPanierById(req.session.id);
-    console.log('panier');
     panier.remove(req.params.formaid);
-    console.log(panier);
     res.redirect('/voirpanier');
 };
 
@@ -33,27 +29,25 @@ exports.removepanier = function(req,res){
 exports.voirPanier = function(req, res){
     panier = getPanierById(req.session.id);
     if (panier.getListLenght()>0){
-    let final = [];
-    list = panier.getList();
-    list.forEach(Element =>{
-        connection.query("SELECT * FROM formations WHERE idformation = ?",Element, function(error, result){
-                final.push(result);
-            })
-    });
-    setTimeout(function() {
-        res.render('panier.ejs',{list:final});
-    }, 10);}
+        let sql = "SELECT * FROM formations WHERE idformation IN (";
+        let list = panier.getList();
+        list.forEach(elem =>{
+            sql+="?,";
+        });
+        sql = sql.slice(0,-1);
+        sql+=")";
+        connection.query(sql,panier.getList(), function(error, result){
+            if (error){console.log(error);};
+            res.render('panier.ejs',{list:result});
+        });
+    }
     else{
         res.render('panier.ejs',{list:[]});
     }
 };
 
 exports.addPanier = function(req, res){
-    console.log(getPanierById(req.session.id));
     panier = getPanierById(req.session.id);
-    console.log('ici');
-    console.log(panier);
-    console.log(typeof panier);
     if (!(panier.contains(parseInt(req.params.formaid)))){
         panier.add(parseInt(req.params.formaid));
     }
@@ -61,7 +55,6 @@ exports.addPanier = function(req, res){
 
 exports.finaliser = function(req, res){
     panier = getPanierById(req.session.id);
-    console.log(req.session.user);
     if (typeof req.session.user != 'undefined'){
         querysql = "INSERT INTO personne_formation (id_formation, pseudo) VALUES";
         values = [];
@@ -76,12 +69,12 @@ exports.finaliser = function(req, res){
         connection.query(querysql, values, function(error, result){Error
             if(error){
                 if (error['code'] == 'ER_DUP_ENTRY'){
-                    res.render('end.ejs', {state: 'errordup'});
+                    return res.render('end.ejs', {state: 'errordup'});
                 }
-                else {console.log(error); res.render('end.ejs', {state: 'error'})}
+                else {console.log(error); return res.render('end.ejs', {state: 'error'})}
             }
 
-            else panier.vider();res.render('end.ejs',{state:'succes'});
+            else panier.vider();return res.render('end.ejs',{state:'succes'});
         })
     }
     else{
