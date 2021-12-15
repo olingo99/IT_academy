@@ -6,6 +6,7 @@ button{
     font-size:medium;
     height: 30px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #inscription,#supprimer{

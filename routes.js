@@ -1,5 +1,4 @@
 let express = require('express');
-//express().use(express.static(__dirname + '/public/css'));
 
 let router = express.Router();
 
@@ -11,8 +10,8 @@ var mysql = require("mysql");
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password:'root',
+    user: 'olingo',
+    password:'olingoolingo',
     database: 'it_academy'
 });
 
@@ -32,19 +31,5 @@ router.get('/removepanier/:formaid', panierController.removepanier);
 router.get('/finaliser', panierController.finaliser)
 
 router.post('/login2', userController.sessionLogin2)
-// router.post('/add', (request, response)=>{
-//     let item = request.body.newItem;
-//         if (item != ''){
-//             state = 'succes'
-//             connection.query("INSERT INTO taches SET ?;", {"tache": item}, function(err, result){
-//                 if (err) console.log(err);
-//                 response.redirect('/');
-//             });
-//         }
-//         else{
-//             state = 'error'
-//             response.render('home.ejs', {taches, state})
-//         }
-// });
 
 module.exports = router;

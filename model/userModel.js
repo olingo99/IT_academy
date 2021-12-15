@@ -6,10 +6,8 @@ class User{
     }
     addPanier(){
         this.panier = new Panier();
-        //console.log('panie ajouté')
     }
     getPanier(){
-        //console.log('panier retourné');
         return this.panier;
         
     }

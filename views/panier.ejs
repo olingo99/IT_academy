@@ -30,23 +30,23 @@
                 <% for( let index=0; index < list.length; index++ ) { %>
                     <tr>
                         <th>
-                            <%=list[index][0].idformation%>
+                            <%=list[index].idformation%>
                         </th>
                         <th>
-                            <%=list[index][0].nomformation%>
+                            <%=list[index].nomformation%>
                         </th>
                         <th>
-                            <%=list[index][0].prix%>
+                            <%=list[index].prix%>
                         </th>
                         <th>
-                            <%= list[index][0].debut%>
+                            <%= list[index].debut%>
                         </th>
                         <th>
-                            <%=list[index][0].fin%>
+                            <%=list[index].fin%>
                         </th>
                         <th>
-                            <form action="/removepanier/<%=list[index][0].idformation %> " method="get">
-                                <button id="supprimer" type="submit">supprimer <%=list[index][0].idformation %></button>
+                            <form action="/removepanier/<%=list[index].idformation %> " method="get">
+                                <button id="supprimer" type="submit">supprimer</button>
                             </form>
                         </th>
                     </tr>
