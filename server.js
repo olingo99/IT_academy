@@ -15,9 +15,6 @@ app.use(session({
 
 app.use('/', routes);
 
-app.use('/login/:user', routes);
-
-app.use('/login', routes);
 app.listen(80, function(){
     console.log('server is listening on port 80')  
 });
